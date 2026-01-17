@@ -65,10 +65,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			minutes = 0
 			seconds = 0
 		} else {
-			;(days = Math.floor(time / (1000 * 60 * 60 * 24))),
+			;((days = Math.floor(time / (1000 * 60 * 60 * 24))),
 				(hours = Math.floor((time / (1000 * 60 * 60)) % 24)),
 				(minutes = Math.floor((time / 60000) % 60)),
-				(seconds = Math.floor((time / 1000) % 60))
+				(seconds = Math.floor((time / 1000) % 60)))
 		}
 
 		return {
@@ -105,4 +105,44 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	setClock('.timer', deadline)
+
+	// Modal
+	const modalOpenBtns = document.querySelectorAll('[data-modal]'),
+		modal = document.querySelector('.modal'),
+		modalCloseBtn = document.querySelector('[data-modal-close]'),
+		modalContent = document.querySelector('.modal__content')
+
+	function openModal() {
+		modal.classList.add('show')
+		modal.classList.remove('hide')
+		modalContent.classList.add('modal-fade')
+		document.body.style.overflow = 'hidden'
+		clearInterval(modalTimerId)
+	}
+
+	function closeModal() {
+		modal.classList.add('hide')
+		modal.classList.remove('show')
+		document.body.style.overflow = ''
+	}
+
+	modalOpenBtns.forEach(btn => {
+		btn.addEventListener('click', openModal)
+	})
+
+	modalCloseBtn.addEventListener('click', closeModal)
+
+	modal.addEventListener('click', event => {
+		if (event.target === modal) {
+			closeModal()
+		}
+	})
+
+	document.addEventListener('keydown', event => {
+		if (event.code == 'Escape' && modal.classList.contains('show')) {
+			closeModal()
+		}
+	})
+
+	const modalTimerId = setTimeout(openModal, 5000)
 })

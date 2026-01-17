@@ -878,6 +878,20 @@ form button {
 	}
 }
 
+.modal-fade {
+	animation-name: modalFade;
+	animation-duration: 0.5s;
+}
+
+@keyframes modalFade {
+	from {
+		transform: translateY(-100px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
 .loader {
 	width: 48px;
 	height: 48px;
