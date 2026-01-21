@@ -145,4 +145,96 @@ window.addEventListener('DOMContentLoaded', () => {
 	})
 
 	const modalTimerId = setTimeout(openModal, 5000)
+
+	// Class
+
+	class offerMenu {
+		constructor(
+			imageSrc,
+			imageAlt,
+			title,
+			description,
+			discount,
+			price,
+			parentSelector,
+		) {
+			this.imageSrc = imageSrc
+			this.imageAlt = imageAlt
+			this.title = title
+			this.description = description
+			this.discount = discount
+			this.price = price
+			this.parent = document.querySelector(parentSelector)
+			this.formatToUSD()
+		}
+
+		formatToUSD() {
+			this.discount = this.discount.toLocaleString('en-US', {
+				style: 'currency',
+				currency: 'USD',
+			})
+			this.price = this.price.toLocaleString('en-US', {
+				style: 'currency',
+				currency: 'USD',
+			})
+		}
+
+		render() {
+			const element = document.createElement('div')
+
+			element.innerHTML = `
+			<div>
+        <img src=${this.imageSrc} alt="${this.imageAlt}">
+          <div>
+            <h3>${this.title}</h3>
+            <p>${this.description}</p>
+            <p><del>${this.discount}</del> <span class="primary-text">${this.price}</span></p>
+          </div>
+      </div>`
+
+			this.parent.append(element)
+		}
+	}
+
+	const offers = [
+		{
+			src: './img/offer1.png',
+			alt: 'Quattro Pasta',
+			title: 'Quattro Pasta',
+			description: 'Delicious Italian pasta with a blend of four cheeses.',
+			discount: 55,
+			price: 18,
+		},
+		{
+			src: './img/offer2.png',
+			alt: 'Vegertarian Pasta',
+			title: 'Vegertarian Pasta',
+			description:
+				'Delicious vegetarian pasta with a blend of fresh vegetables.',
+			discount: 45,
+			price: 15,
+		},
+		{
+			src: './img/offer3.png',
+			alt: 'Gluten-Free Pasta',
+			title: 'Gluten-Free Pasta',
+			description: 'Tasty gluten-free pasta made from rice flour and cornmeal.',
+			discount: 65,
+			price: 22,
+		},
+	]
+
+	offers.forEach(offer => {
+		const { src, alt, title, description, discount, price } = offer
+
+		new offerMenu(
+			src,
+			alt,
+			title,
+			description,
+			discount,
+			price,
+			'.offers-items',
+		).render()
+	})
 })
