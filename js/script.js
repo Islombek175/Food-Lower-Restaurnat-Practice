@@ -1,3 +1,5 @@
+'use strict'
+
 window.addEventListener('DOMContentLoaded', () => {
 	// Tabs
 
@@ -196,47 +198,26 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	const offers = [
-		{
-			src: './img/offer1.png',
-			alt: 'Quattro Pasta',
-			title: 'Quattro Pasta',
-			description: 'Delicious Italian pasta with a blend of four cheeses.',
-			discount: 55,
-			price: 18,
-		},
-		{
-			src: './img/offer2.png',
-			alt: 'Vegertarian Pasta',
-			title: 'Vegertarian Pasta',
-			description:
-				'Delicious vegetarian pasta with a blend of fresh vegetables.',
-			discount: 45,
-			price: 15,
-		},
-		{
-			src: './img/offer3.png',
-			alt: 'Gluten-Free Pasta',
-			title: 'Gluten-Free Pasta',
-			description: 'Tasty gluten-free pasta made from rice flour and cornmeal.',
-			discount: 65,
-			price: 22,
-		},
-	]
+	fetch('http://localhost:3000/offers', {
+		method: 'GET',
+		headers: { 'Content-type': 'application/json' },
+	}).then(response =>
+		response.json().then(data => {
+			data.forEach(offer => {
+				const { src, alt, title, description, discount, price } = offer
 
-	offers.forEach(offer => {
-		const { src, alt, title, description, discount, price } = offer
-
-		new offerMenu(
-			src,
-			alt,
-			title,
-			description,
-			discount,
-			price,
-			'.offers-items',
-		).render()
-	})
+				new offerMenu(
+					src,
+					alt,
+					title,
+					description,
+					discount,
+					price,
+					'.offers-items',
+				).render()
+			})
+		}),
+	)
 
 	// FORM
 	const form = document.querySelector('form'),
@@ -266,6 +247,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			object[key] = value
 		})
 
+		// -----SENDING MESSAGE TO TGBOT
 		fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
 			method: 'POST',
 			headers: {

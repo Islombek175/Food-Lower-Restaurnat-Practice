@@ -1,0 +1,28 @@
+{
+	"name": "food-lower-restaurnat-practice",
+	"version": "1.0.0",
+	"description": "",
+	"homepage": "https://github.com/Islombek175/Food-Lower-Restaurnat-Practice#readme",
+	"bugs": {
+		"url": "https://github.com/Islombek175/Food-Lower-Restaurnat-Practice/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Islombek175/Food-Lower-Restaurnat-Practice.git"
+	},
+	"license": "ISC",
+	"author": "islombek",
+	"type": "module",
+	"main": "js/script.js",
+	"scripts": {
+		"test": "node js/script.js"
+	},
+	"dependencies": {
+		"json-server": "^1.0.0-beta.5"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.2",
+		"eslint": "^9.39.2",
+		"globals": "^17.2.0"
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"offers": [
+		{
+			"src": "./img/offer1.png",
+			"alt": "Quattro Pasta",
+			"title": "Quattro Pasta",
+			"description": "Delicious Italian pasta with a blend of four cheeses.",
+			"discount": 55,
+			"price": 18
+		},
+		{
+			"src": "./img/offer2.png",
+			"alt": "Vegertarian Pasta",
+			"title": "Vegertarian Pasta",
+			"description": "Delicious vegetarian pasta with a blend of fresh vegetables.",
+			"discount": 45,
+			"price": 15
+		},
+		{
+			"src": "./img/offer3.png",
+			"alt": "Gluten-Free Pasta",
+			"title": "Gluten-Free Pasta",
+			"description": "Tasty gluten-free pasta made from rice flour and cornmeal.",
+			"discount": 65,
+			"price": 22
+		}
+	]
+}
