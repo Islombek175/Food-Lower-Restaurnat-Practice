@@ -12,7 +12,6 @@
 	},
 	"license": "ISC",
 	"author": "islombek",
-	"type": "module",
 	"main": "js/script.js",
 	"scripts": {
 		"test": "node js/script.js"
@@ -23,6 +22,8 @@
 	"devDependencies": {
 		"@eslint/js": "^9.39.2",
 		"eslint": "^9.39.2",
-		"globals": "^17.2.0"
+		"globals": "^17.2.0",
+		"webpack": "^5.105.0",
+		"webpack-cli": "^6.0.1"
 	}
 }
