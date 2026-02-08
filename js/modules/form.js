@@ -28,31 +28,33 @@ function form(formSelector, modalTimerId) {
 			object[key] = value
 		})
 
-		// -----SENDING MESSAGE TO TGBOT
-		fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify({
-				chat_id: chatId,
-				text: `
-				Name: ${object.name}, Phone: ${object.phone}`,
-			}),
-		})
-			.then(() => {
-				showStatusMessage(message.success)
-				form.reset()
-			})
-			.catch(() => {
-				showStatusMessage(message.failure)
-			})
-			.finally(() => {
-				setTimeout(() => {
-					loader.remove()
-				}, 2000)
-			})
+		sendMessage(object, loader, form)
 	})
+
+	async function sendMessage(object, loader, form) {
+		try {
+			await fetch(
+				`https://api.telegram.org/bot${telegramBotToken}/sendMessage`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json',
+					},
+					body: JSON.stringify({
+						chat_id: chatId,
+						text: `
+					Name: ${object.name}, Phone: ${object.phone}`,
+					}),
+				},
+			)
+			showStatusMessage(message.success)
+		} catch {
+			showStatusMessage(message.failure)
+		} finally {
+			loader.remove()
+			form.reset()
+		}
+	}
 
 	function showStatusMessage(message) {
 		const modalDialog = document.querySelector('.modal__dialog')
